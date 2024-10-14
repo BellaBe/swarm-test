@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "test-swarm"
+version = "0.1.0"
+description = ""
+authors = ["BellaBe <bella@actualize.ae>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+openai = "^1.51.2"
+numpy = "^2.1.2"
+requests = "^2.32.3"
+tqdm = "^4.66.5"
+pre-commit = "^4.0.1"
+instructor = "^1.5.2"
+pydantic = "^2.9.2"
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
