@@ -1,20 +1,21 @@
-from src.configs.coordinator import get_agent
 from src.swarm.types import Agent
 
-
 def quality_assurance_instructions(context_variables):
+    compliance_response = context_variables.get("ComplianceAgent_response", "")
     return f"""
-    You are the Quality Assurance Agent.
-    Perform the final review of the contract for consistency, clarity, completeness, and legal soundness.
-    Once all checks are complete, resolve the case.
+    You are the QualityAssuranceAgent.
+    Perform a final review of the contract to ensure consistency, clarity, completeness, and legal soundness.
+    Below is the compliance-checked contract: "{compliance_response}".
+    Once the review is completed, finalize the contract and return the full text of the final contract to the user.
     """
-    
-def case_resolved():
-    return "Contract drafting complete. Case resolved."
+
+def finalize_and_return_contract():
+    return "Contract drafting complete. Here is the final contract."
 
 quality_assurance_agent = Agent(
-    name="Quality Assurance Agent",
+    name="QualityAssuranceAgent",
     instructions=quality_assurance_instructions,
-    functions=[case_resolved],
+    functions=[finalize_and_return_contract],
 )
+
 

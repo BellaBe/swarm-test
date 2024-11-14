@@ -1,22 +1,21 @@
 from src.configs.coordinator import get_agent
 from src.swarm.types import Agent
 
-
-
-
 def jurisdiction_instructions(context_variables):
     jurisdiction = context_variables.get("jurisdiction", None)
+    contract_type = context_variables.get("contract_type", None)
     return f"""
-    You are the Jurisdiction Agent.
-    Ensure that the contract adheres to the legal framework for the jurisdiction: {jurisdiction}.
-    If the jurisdiction is valid, transfer to ContractTypeAgent.
+    You are the JurisdictionAgent.
+    Your task is to identify jurisdiction-specific legal requirements for the jurisdiction: {jurisdiction} and contract type: {contract_type}.
+    Highlight any mandatory clauses, legal language, or important considerations that should be included in the contract.
+    After providing this information, transfer to the LegalContextAgent.
     """
-  
-def transfer_to_contract_type():
-    return get_agent("contract_type")  
+
+def transfer_to_legal_context():
+    return get_agent("LegalContextAgent")
 
 jurisdiction_agent = Agent(
-    name="Jurisdiction Agent",
+    name="JurisdictionAgent",
     instructions=jurisdiction_instructions,
-    functions=[transfer_to_contract_type],
+    functions=[transfer_to_legal_context],
 )

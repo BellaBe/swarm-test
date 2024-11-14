@@ -178,15 +178,21 @@ class Swarm:
             )
 
             yield {"delim": "start"}
+            llm_response = ""
             for chunk in completion:
                 delta = json.loads(chunk.choices[0].delta.json())
                 if delta["role"] == "assistant":
                     delta["sender"] = active_agent.name
+                if delta.get("content") is not None:
+                    llm_response += delta["content"]
                 yield delta
                 delta.pop("role", None)
                 delta.pop("sender", None)
                 merge_chunk(message, delta)
             yield {"delim": "end"}
+            
+            if llm_response:
+                context_variables[f"{active_agent.name}_response"] = llm_response
 
             message["tool_calls"] = list(
                 message.get("tool_calls", {}).values())

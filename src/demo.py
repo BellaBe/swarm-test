@@ -91,15 +91,9 @@ def run_demo_loop(
 
 if __name__ == "__main__":
     context_variables = {
-        "jurisdiction": "DIFC",
-        "contract_type": "Employment Contract",
-        "contract_context": {
-            "party1": "Employer",
-            "party2": "Employee",
-            "contract_duration": "1 year",
-            "compensation": "AED 100,000 annually"
-        }
+        "jurisdiction": "Abu Dhabi",
+        "contract_type": "Request for Proposal Response",
     }
 
     # Start with JurisdictionAgent and follow the flow
-    run_demo_loop(jurisdiction_agent, context_variables=context_variables, debug=True, stream=True)
+    run_demo_loop(jurisdiction_agent, context_variables=context_variables, debug=False, stream=True)
